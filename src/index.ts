@@ -36,6 +36,7 @@ app.get(":project", async (c) => {
 
   const stats = await fetchStats(c.env.MY_KV_NAMESPACE, projectName)
   if (stats === null) { c.status(500); return c.body("Internal Server Error") }
+  c.res.headers.set('Cache-Control', 'public, max-age=30')
   return c.html(PageHTML({ projectName: 'sotsuron', progressStats: PageStatsToProgressStats(stats) }))
 })
 
@@ -46,6 +47,7 @@ app.get(":project/json", async (c) => {
   const rawStats = await fetchStats(c.env.MY_KV_NAMESPACE, projectName)
   if (rawStats === null) { c.status(500); return c.body("Internal Server Error") }
 
+  c.res.headers.set('Cache-Control', 'public, max-age=30')
   return c.json(PageStatsToProgressStats(rawStats))
 })
 
