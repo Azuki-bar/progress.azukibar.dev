@@ -9,7 +9,7 @@ const UnixTimeToJapaneseDateTime = (unixTime: number): string => {
   if (!date) return '不明'
   // UnixTimeはUTCなので、日本時間に変換する
   date.setHours(date.getHours() + 9)
-  return `${date.getFullYear()}年${date.getMonth() + 1}月${date.getDay()}日 ${date.getHours()}時${date.getMinutes()}分${date.getSeconds()}秒`
+  return `${date.getFullYear()}年${date.getMonth() + 1}月${date.getDay()}日 ${date.getHours()}時${date.getMinutes()}分`
 }
 
 const japaneseProjectNames: Record<AllowedProject, string> = {
