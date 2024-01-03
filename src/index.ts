@@ -35,7 +35,7 @@ app.get(":project", async (c) => {
   if (!IsAllowedProject(projectName)) { return c.notFound() }
 
   const stats = await fetchStats(c.env.MY_KV_NAMESPACE, projectName)
-  if (stats === null) { c.status(500); return c.body("Internal Server Erroa  r") }
+  if (stats === null) { c.status(500); return c.body("Internal Server Error") }
   return c.html(PageHTML({ pagesCount: stats.page }))
 })
 

@@ -23,13 +23,12 @@ export const PageHTML = (props: Props) => {
 
 <body class="wf-notosansjapanese">
   <p>あずきバーくんの現在の「卒論」進捗は<span id="progress" style="color: red">${props.pagesCount}</span>ページです</p>
-  <a
-    href="https://twitter.com/share?ref_src=twsrc%5Etfw"
-    class="twitter-share-button"
-    data-show-count="false"
-    id="tweet"
-    data-text="あずきバーくんの現在の卒論進捗は${props.pagesCount}ページです。 https://progress.azukibar.dev/sotsuron"
-  >Tweet</a>
+<a href="https://twitter.com/share?ref_src=twsrc%5Etfw"
+  class="twitter-share-button"
+  data-text="あずきバーくんの現在の卒論進捗は${props.pagesCount}ページです。"
+  data-url="https://progress.azukibar.dev/sotsuron"
+  data-dnt="true"
+  data-show-count="false">Tweet</a>
   <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 </body>
 </html>
