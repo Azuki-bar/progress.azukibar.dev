@@ -38,7 +38,7 @@ export const PageHTML = (props: Props) => {
 <body class="wf-notosansjapanese">
   <p>あずきバーくんの現在の「${japaneseProjectName}」進捗は<span id="progress" style="color: red">${props.progressStats.pagesCount}</span>ページです</p>
   <p><a href="/${props.projectName}/json">json</a></p>
-  <p>最終更新日時: ${UnixTimeToJapaneseDateTime(props.progressStats.lastUpdated)}</p>
+  <p>最終更新日時: ${UnixTimeToJapaneseDateTime(props.progressStats.lastUpdatedAt)}</p>
 <a href="https://twitter.com/share?ref_src=twsrc%5Etfw"
   class="twitter-share-button"
   data-text="あずきバーくんの現在の${japaneseProjectName}進捗は${props.progressStats.pagesCount}ページです。"
