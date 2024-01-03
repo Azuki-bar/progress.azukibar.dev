@@ -1,9 +1,23 @@
 import { html } from 'hono/html'
+import { AllowedProject, ProgressStats } from '..'
 type Props = {
-  pagesCount: number
+  projectName: AllowedProject
+  progressStats: ProgressStats
+}
+const UnixTimeToJapaneseDateTime = (unixTime: number): string => {
+  const date = new Date(unixTime * 1000)
+  if (!date) return '不明'
+  // UnixTimeはUTCなので、日本時間に変換する
+  date.setHours(date.getHours() + 9)
+  return `${date.getFullYear()}年${date.getMonth() + 1}月${date.getDay()}日 ${date.getHours()}時${date.getMinutes()}分${date.getSeconds()}秒`
+}
+
+const japaneseProjectNames: Record<AllowedProject, string> = {
+  sotsuron: '卒論',
 }
 export const PageHTML = (props: Props) => {
-  const title = "あずきバーくんの卒論進捗"
+  const japaneseProjectName = japaneseProjectNames[props.projectName]
+
   return html`
 <!DOCTYPE html>
 <html lang="en">
@@ -18,15 +32,17 @@ export const PageHTML = (props: Props) => {
     }
 
   </style>
-  <title>${title}</title>
+  <title>あずきバーくんの${japaneseProjectName}進捗</title>
 </head>
 
 <body class="wf-notosansjapanese">
-  <p>あずきバーくんの現在の「卒論」進捗は<span id="progress" style="color: red">${props.pagesCount}</span>ページです</p>
+  <p>あずきバーくんの現在の「${japaneseProjectName}」進捗は<span id="progress" style="color: red">${props.progressStats.pagesCount}</span>ページです</p>
+  <p><a href="/${props.projectName}/json">json</a></p>
+  <p>最終更新日時: ${UnixTimeToJapaneseDateTime(props.progressStats.lastUpdated)}</p>
 <a href="https://twitter.com/share?ref_src=twsrc%5Etfw"
   class="twitter-share-button"
-  data-text="あずきバーくんの現在の卒論進捗は${props.pagesCount}ページです。"
-  data-url="https://progress.azukibar.dev/sotsuron"
+  data-text="あずきバーくんの現在の${japaneseProjectName}進捗は${props.progressStats.pagesCount}ページです。"
+  data-url="https://progress.azukibar.dev/${props.projectName}"
   data-dnt="true"
   data-show-count="false">Tweet</a>
   <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>

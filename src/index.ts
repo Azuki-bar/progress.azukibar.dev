@@ -6,12 +6,14 @@ type EnvBindings = {
   MY_KV_NAMESPACE: KVNamespace
 }
 // ユーザに露出する情報
-type ProgressStats = {
+export type ProgressStats = {
   pagesCount: number
+  lastUpdated: number
 }
 const PageStatsToProgressStats = (stats: PageStats): ProgressStats => {
   return {
     pagesCount: stats.page,
+    lastUpdated: stats.lastUpdatedAt,
   }
 }
 
@@ -34,7 +36,7 @@ app.get(":project", async (c) => {
 
   const stats = await fetchStats(c.env.MY_KV_NAMESPACE, projectName)
   if (stats === null) { c.status(500); return c.body("Internal Server Error") }
-  return c.html(PageHTML({ pagesCount: stats.page }))
+  return c.html(PageHTML({ projectName: 'sotsuron', progressStats: PageStatsToProgressStats(stats) }))
 })
 
 app.get(":project/json", async (c) => {
