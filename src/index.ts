@@ -8,12 +8,10 @@ type EnvBindings = {
 // ユーザに露出する情報
 type ProgressStats = {
   pagesCount: number
-  referencesCount: number
 }
 const PageStatsToProgressStats = (stats: PageStats): ProgressStats => {
   return {
     pagesCount: stats.page,
-    referencesCount: 0,
   }
 }
 
