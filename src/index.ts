@@ -1,5 +1,6 @@
 import { Hono } from 'hono'
 import { logger } from 'hono/logger'
+import { etag } from 'hono/etag'
 import { PageStats, fetchStats } from './fetchJson'
 import { PageHTML } from './templates/pages'
 
@@ -28,6 +29,7 @@ const successfulCacheControl = 'public, max-age=30' as const;
 
 const app = new Hono<{ Bindings: EnvBindings }>()
 app.use('*', logger())
+app.use('*', etag())
 
 app.get('/', (c) => {
   return c.redirect("/sotsuron")
