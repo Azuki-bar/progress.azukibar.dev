@@ -1,4 +1,11 @@
-export const fetchJson = async <T>(kvNs: KVNamespace): Promise<Awaited<T>> => {
-  const json = await kvNs.get('data', 'json') as string
-  return JSON.parse(json) satisfies T
+import { AllowedProject } from "."
+
+export type PageStats = {
+  page: number
+}
+
+export const fetchStats = async (kv: KVNamespace, name: AllowedProject): Promise<PageStats|null> => {
+  const l = await kv.list()
+  console.log(l.keys)
+  return await kv.get<PageStats>(name, 'json')
 }
