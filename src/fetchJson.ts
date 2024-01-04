@@ -1,11 +1,14 @@
-import { AllowedProject } from "."
+import { AllowedProject } from ".";
 
 export type PageStats = {
-  page: number
+  page: number;
   // unix timeで保存される
-  lastUpdatedAt: number
-}
+  lastUpdatedAt: number;
+};
 
-export const fetchStats = async (kv: KVNamespace, name: AllowedProject): Promise<PageStats|null> => {
-  return kv.get<PageStats>(name, 'json')
-}
+export const fetchStats = async (
+  kv: KVNamespace,
+  name: AllowedProject,
+): Promise<PageStats | null> => {
+  return kv.get<PageStats>(name, "json");
+};
