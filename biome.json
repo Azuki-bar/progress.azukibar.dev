@@ -8,5 +8,10 @@
 		"rules": {
 			"recommended": true
 		}
+	},
+	"formatter": {
+		"indentStyle": "space",
+		"indentWidth": 2,
+		"lineWidth": 100
 	}
 }

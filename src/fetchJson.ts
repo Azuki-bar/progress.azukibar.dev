@@ -7,5 +7,5 @@ export type PageStats = {
 }
 
 export const fetchStats = async (kv: KVNamespace, name: AllowedProject): Promise<PageStats|null> => {
-  return await kv.get<PageStats>(name, 'json')
+  return kv.get<PageStats>(name, 'json')
 }
