@@ -50,7 +50,6 @@ export const PageHTML = (props: Props) => {
   data-dnt="true"
   data-show-count="false">Tweet</a>
   <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-  <!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "1d37d03b746548c4bd334c6e622295e7"}'></script><!-- End Cloudflare Web Analytics -->
 </body>
 </html>
 `;
