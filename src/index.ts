@@ -42,7 +42,7 @@ app.get(":project", async (c) => {
   }
 
   const stats = await fetchStats(c.env.MY_KV_NAMESPACE, projectName);
-  if (stats === null) {
+  if (stats == null) {
     c.status(500);
     return c.body("Internal Server Error");
   }
@@ -59,7 +59,7 @@ app.get(":project/json", async (c) => {
   }
 
   const rawStats = await fetchStats(c.env.MY_KV_NAMESPACE, projectName);
-  if (rawStats === null) {
+  if (rawStats == null) {
     c.status(500);
     return c.json({ status: "internalServererror" });
   }

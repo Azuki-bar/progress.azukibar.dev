@@ -1,18 +1,13 @@
+import dayjs from "dayjs";
 import { html } from "hono/html";
 import { AllowedProject, ProgressStats } from "..";
 type Props = {
   projectName: AllowedProject;
   progressStats: ProgressStats;
 };
-const UnixTimeToJapaneseDateTime = (unixTime: number): string => {
-  const date = new Date(unixTime * 1000);
-  if (!date) return "不明";
-  // UnixTimeはUTCなので、日本時間に変換する
-  date.setHours(date.getHours() + 9);
-  return `${date.getFullYear()}年${
-    date.getMonth() + 1
-  }月${date.getDay()}日 ${date.getHours()}時${date.getMinutes()}分`;
-};
+
+const UnixTimeToJapaneseDateTime = (unixTime: number): string =>
+  dayjs.unix(unixTime).locale("ja").format("YYYY年MM月DD日 HH時mm分ss秒");
 
 const japaneseProjectNames: Record<AllowedProject, string> = {
   sotsuron: "卒論",
