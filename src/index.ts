@@ -5,7 +5,7 @@ import { PageStats, fetchStats } from "./fetchJson";
 import { PageHTML } from "./templates/pages";
 
 type EnvBindings = {
-  MY_KV_NAMESPACE: KVNamespace;
+  PROGRESSOR_KV_NAMESPACE: KVNamespace;
 };
 // ユーザに露出する情報
 export type ProgressStats = {
@@ -41,7 +41,7 @@ app.get(":project", async (c) => {
     return c.notFound();
   }
 
-  const stats = await fetchStats(c.env.MY_KV_NAMESPACE, projectName);
+  const stats = await fetchStats(c.env.PROGRESSOR_KV_NAMESPACE, projectName);
   if (stats == null) {
     c.status(500);
     return c.body("Internal Server Error");
@@ -58,7 +58,7 @@ app.get(":project/json", async (c) => {
     return c.notFound();
   }
 
-  const rawStats = await fetchStats(c.env.MY_KV_NAMESPACE, projectName);
+  const rawStats = await fetchStats(c.env.PROGRESSOR_KV_NAMESPACE, projectName);
   if (rawStats == null) {
     c.status(500);
     return c.json({ status: "internalServererror" });
