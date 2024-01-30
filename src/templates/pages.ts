@@ -1,4 +1,6 @@
 import dayjs from "dayjs";
+import timezone from "dayjs/plugin/timezone";
+import utc from "dayjs/plugin/utc";
 import { html } from "hono/html";
 import { AllowedProject, ProgressStats } from "..";
 type Props = {
@@ -6,18 +8,23 @@ type Props = {
   progressStats: ProgressStats;
 };
 
+dayjs.extend(timezone);
+dayjs.extend(utc);
 const UnixTimeToJapaneseDateTime = (unixTime: number): string =>
-  dayjs.unix(unixTime).locale("ja").format("YYYY年MM月DD日 HH時mm分ss秒");
+  dayjs(unixTime * 1000)
+    .tz("Asia/Tokyo")
+    .format("YYYY年MM月DD日 HH時mm分ss秒");
 
-const japaneseProjectNames: Record<AllowedProject, string> = {
+const japaneseProjectNames: Readonly<Record<AllowedProject, string>> = {
   sotsuron: "卒論",
 };
+
 export const PageHTML = (props: Props) => {
   const japaneseProjectName = japaneseProjectNames[props.projectName];
 
   return html`
 <!DOCTYPE html>
-<html lang="en">
+<html lang="jp">
 <head>
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
