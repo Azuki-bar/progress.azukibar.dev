@@ -13,7 +13,7 @@ TBD
 ```json
 {
   "lastUpdatedAt": "number型のunixtimeを意図。単位は秒",
-  "pagesCount": "ページカウント"
+  "page": "ページ数"
 }
 ```
 
