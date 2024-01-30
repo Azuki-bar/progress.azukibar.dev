@@ -16,7 +16,7 @@
     "@cloudflare/workers-types": "4.20240129.0",
     "npm-run-all2": "6.1.1",
     "typescript": "5.3.3",
-    "wrangler": "3.22.2"
+    "wrangler": "3.25.0"
   },
   "packageManager": "pnpm@8.15.1"
 }
