@@ -1,0 +1,24 @@
+name: Deploy to Cloudflare Workers
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: prepare wrangler.toml
+        run: |
+          perl -pE '
+          s/<<YOUR_ID>>/$ENV{CLOUDFLARE_KV_ID}/g;
+          s/<<YOUR_PREVIEW_ID>>/$ENV{CLOUDFLARE_KV_PREVIEW_ID}/g;
+          ' wrangler.toml.example > wrangler.toml
+      - name: Deploy prepare
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          command: deploy --minify src/index.ts
